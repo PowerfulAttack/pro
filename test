@@ -1,0 +1,30 @@
+    public boolean test(File file){
+        String path = file.getPath();
+
+        try {
+            List<String> input = Files.readAllLines(Paths.get(path));
+            List<Character> chesscomponent= Arrays.asList('R','r','K','k','Q','q','B','b','P','p','_','n','N','w');
+            for (int i=0;i<input.size();i++){
+                if (!input.contains(chesscomponent)) {
+                    JOptionPane.showMessageDialog(null, "Wrong Chesscomponent", "错误信息", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+            if (!path.endsWith(".txt")){
+                JOptionPane.showMessageDialog(null,"Wrong Format","错误信息",JOptionPane.ERROR_MESSAGE);
+                return false;}
+            else if (input.size()!=9){
+                JOptionPane.showMessageDialog(null,"Wrong Size","错误信息",JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else if (input.get(9).charAt(1)!='w'&&input.get(9).charAt(1)!='b'){
+                JOptionPane.showMessageDialog(null,"Lost Next Player","错误信息",JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    return true;}
