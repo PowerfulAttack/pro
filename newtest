@@ -1,0 +1,82 @@
+    private void addLoadGameButton() {
+        JButton button = new JButton("Load Game");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 240);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+
+        button.addActionListener(e -> {
+            System.out.println("Click load");
+            String path = JOptionPane.showInputDialog(this,"Input Path here");
+            File file = new File(path);
+            StringBuilder stringBuilder = new StringBuilder("Errorcode:");
+            if (testformat(path)) {
+                stringBuilder.append("104");
+            }
+            try {
+                Scanner input = new Scanner(file);
+                List<String> chessboard1 = new ArrayList<>();
+                while (input.hasNext()){
+                    chessboard1.add(input.nextLine());
+                }
+                ChessGameFrame mainFrame = new ChessGameFrame(1000, 760, (ArrayList<String>) chessboard1);
+                mainFrame.setVisible(true);
+
+
+                System.out.println(chessboard1);
+                if (testchessboard((StringList) chessboard1))
+                    stringBuilder.append(",101");
+                if (testchess((StringList) chessboard1))
+                    stringBuilder.append(",102");
+                if (testplayer((StringList) chessboard1))
+                    stringBuilder.append(",103");
+                String wrongMessage =stringBuilder.toString();
+                JOptionPane.showMessageDialog(null,wrongMessage);
+
+
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+
+        });
+    }
+
+    public boolean testformat(String path){
+        //格式检查//
+        if (!path.endsWith(".txt")){
+           return false;
+        }
+        else return true;
+    }
+    public boolean testchessboard(StringList chessboard1) {
+        //棋盘长度8*8检查//
+        boolean check=true;
+        for (int i = 0; i < chessboard1.size() - 1; i++) {
+            if (chessboard1.size() - 1 != 8 || chessboard1.get(i).length() != 8) {
+                check=false;
+            } else
+                check=true;
+        }
+        return check;
+    }
+    public boolean testchess(StringList chessboard1){
+        //棋子检查//
+        boolean check = true;
+        List<Character> chess= Arrays.asList('R','r','K','k','Q','q','B','b','P','p','_','n','N','w');
+        for (int j=0;j<chessboard1.size();j++){
+            if (!chess.contains(chessboard1.get(j))) {
+                check=false;
+            }
+            else
+                check=true;
+        }
+        return check;
+    }
+    public boolean testplayer(StringList chessboard1){
+        //行棋方检查//
+        if (!chessboard1.get(chessboard1.size()-1).equals('w')&&!chessboard1.get(chessboard1.size()-1).equals('b')){
+            return false;
+        }
+        else return true;
+
+    }
