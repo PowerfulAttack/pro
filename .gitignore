@@ -1,0 +1,59 @@
+# 默认忽略的文件
+/shelf/
+/.idea/workspace.xml
+# 基于编辑器的 HTTP 客户端请求
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Lock file
+*.lock
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+out/
+
+# idea
+.idea/
+
+*velocity.log*
+
+
+### STS ###
+.apt_generated
+.factorypath
+.springBeans
+
+### Intellij IDEA ###
+*.iml
+*.ipr
+*.iws
+.idea
+.classpath
+.project
+.settings/
+bin/
+
+tmp/
+
+# rebel
+*rebel.xml*
